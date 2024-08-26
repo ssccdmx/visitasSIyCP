@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"><html lang="es">
+	<title>Visitas DUCS</title>
+    <link href="../css/style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a84d99523.js" crossorigin="anonymous"></script>
+    <script src="../js/login.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+  
+<body>      
+
+  <header id="header" class="header-default">
+
+    <div id="toggle-menu">
+      <span class="top"></span>
+      <span class="middle"></span>
+      <span class="bottom"></span>
+    </div>
+
+    <nav class="menu-principal">
+      <ul>
+        <li>
+          <i style="font-size: 25px;" class="fa fa-map-location-dot"></i>
+          <a href="https://www.google.com/maps/d/u/0/viewer?hl=es-419&mid=1IiQTZLaM1urBKtU9dJMriJ1vXcAPUIs&ll=19.3207153191266%2C-99.1526945&z=11" title="Visualizar Mapa">Visualizar Mapa</a>
+          <br>
+          <div class="hr"></div>
+        </li>
+        
+        <li>
+          <i style="font-size: 25px;"class="fa fa-right-to-bracket"></i>
+          <a href="../index.html">Cerrar Sesión</a>
+          <br>
+          <div class="hr"></div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="body-contenido">     
+    <div class="container-header">
+      <div class="container1">
+        <a href="#">
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEi3ouWmc289s2c3B0hAosCcanMHev7GpqJ0bdliBvFWxcWUJnBnc_29XfxejXOzG11uND6q4TCVXk-nIMHv5jrun4oAp5NG43gXBzCvk0PUApcZCUE2PK2gbE8Ckv5Ka45oipi3IciATVDOGoDbWI0BlOKLzTV0qKrm3WfKLsgIDhl6vXH4ZJ6_GiUQnQ" style="max-width:100%;">
+        </a>
+      </div>
+      <div class="container2">
+        <ul>
+          <a>Bienvenid@ <strong><span id="userAlias"></span></strong></a>
+            <script src="../js/user.js"></script>
+          <br>
+
+          <i class="fecha-text">
+            <script src="../js/date.js"></script>
+          </i>
+        </ul>
+      </div>
+    </div>  
+
+
+    <main>
+      <br>
+      <div class="container">
+        <div class="Title">
+          <h1>Subdirección de Intervención y Contacto Policial</h1>
+        </div>
+        <br>
+
+
+
+          <div id="map" style="height: 500px;width: 90%;"></div><br>
+
+          <div class="container-header1">
+
+            <form  class="formulario" id="formulario">
+
+
+                <div class="label-search2">Status
+                  <select id="Status" name="Status" required>
+                    <option style="color:gainsboro;" value="">-Elegir opción-</option>
+                    <option value="Victima localizada">Victima localizada</option>
+                    <option value="Entrevista con familiares">Entrevista con familiares</option>
+                    <option value="Entrevista con vecinos">Entrevista con vecinos</option>
+                    <option value="X3 por domicilio">X3 por domicilio</option>
+                    <option value="Más datos">Más datos</option>
+                    <option value="Visitas en X3">Visitas en X3</option>
+                    <option value="No corresponde">No corresponde</option>
+                    <option value="Sin realizar">Sin realizar</option>
+                    <option value="Otros">Otros</option>
+                  </select>
+                </div><br>
+
+                <div id="other-status-container"></div>
+
+              
+              <!-- Campo oculto para el valor de Integrante -->
+              <input type="hidden" id="Integrante" name="Integrante">
+
+          
+              <label hidden for="photo">Subir Fotografía:</label>
+              <input hidden type="file" id="photo" name="photo" accept="image/*"><br><br>
+          
+              <button class="button-send" type="submit" id="submit-btn">Enviar</button> <br>
+
+            </form>
+          
+          </div>
+          
+
+
+
+      </div>
+
+    </main>
+  </div>
+
+<script src="../js/index.js"></script>
+
+</body>
+</html>

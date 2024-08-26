@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"><html lang="es">
+	<title>Registro exitoso</title>
+    <link href="../css/style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a84d99523.js" crossorigin="anonymous"></script>
+    <script src="../js/login.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>    
+   
+    
+</head>
+  
+<body>      
+
+  <header id="header" class="header-default">
+
+    <div id="toggle-menu">
+      <span class="top"></span>
+      <span class="middle"></span>
+      <span class="bottom"></span>
+    </div>
+
+    <nav class="menu-principal">
+      <ul>
+        <li>
+          <i style="font-size: 25px;" class="fa fa-file-pdf"></i>
+          <a href="https://docs.google.com/spreadsheets/d/1dxpUOHC8Rqbg6qb3VzI2FYgqfhGMc2AeT7ZhQrJKIAA/edit?gid=0#gid=0" title="Evaluación individual">Generar PDF</a>
+          <br>
+          <div class="hr"></div>
+        </li>
+        
+        <li>
+          <i style="font-size: 25px;"class="fa fa-right-to-bracket"></i>
+          <a href="../index.html">Cerrar Sesión</a>
+          <br>
+          <div class="hr"></div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="body-contenido">     
+    <div class="container-header">
+      <div class="container1">
+        <a href="#">
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEi3ouWmc289s2c3B0hAosCcanMHev7GpqJ0bdliBvFWxcWUJnBnc_29XfxejXOzG11uND6q4TCVXk-nIMHv5jrun4oAp5NG43gXBzCvk0PUApcZCUE2PK2gbE8Ckv5Ka45oipi3IciATVDOGoDbWI0BlOKLzTV0qKrm3WfKLsgIDhl6vXH4ZJ6_GiUQnQ" style="max-width:100%;">
+        </a>
+      </div>
+      <div class="container2">
+        <ul>
+          <a>Bienvenid@ <strong><span id="userAlias"></span></strong></a>
+            <script src="../js/user.js"></script>
+          <br>
+
+          <i class="fecha-text">
+            <script src="../js/date.js"></script>
+          </i>
+        </ul>
+      </div>
+    </div>   
+  
+
+    <main>
+
+      <div id="Level-1">
+        <div class="app">
+          <div class="cardList">
+            <!---button--->
+            <button hidden class="cardList__btn btn btn--left"><div class="icon"><svg><use xlink:href="#arrow-left"></use></svg></button>
+            <!---Endbutton--->
+            <div class="cards__wrapper">
+              <div class="card current--card">
+                <div hidden="card__image"><img src="https://ssccdmx.github.io/AlbumDUCS/img/No-Foto.png" alt="" /></div>
+              </div>
+            </div>
+            <!---Loader--->
+            <button hidden class="cardList__btn btn btn--right"><div class="icon"><svg><use xlink:href="#arrow-right"></use></svg></div></button></div><div class="infoList"><div class="info__wrapper"><div class="info current--info"></div><div class="info next--info"></div><div class="info previous--info"></div></div></div><div class="app__bg"><div class="app__bg__image current--image"><img src="#" alt="" /></div><div class="app__bg__image next--image"><img src="#" alt="" /></div><div class="app__bg__image previous--image"><img src="#" alt="" /></div></div></div><div class="loading__wrapper"><div class="loader--text">Cargando...</div><div class="loader"><span></span></div>
+            <!---EndLoader--->
+          </div>
+      </div>
+
+      <div class="contenedor">
+        <div class="registro-activo">
+            <div class="header">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" STYLE="Color:#013E6A">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+              </svg>
+              <br><h2>REGISTRO EXITOSO</h2>
+              <h3>Se ha enviado correctamente la información, elija una opción</h3><br>
+            </div>
+        
+            <form class="container-buttons">
+              
+              <!-- Cambiar Página -->
+              <script type='text/javascript'>
+                function cambia_de_pagina() {
+                  location.href = "formulario.html";
+                }
+
+                function cambia_de_pagina1() {
+                  location.href = "../index.html";
+                }
+              </script>
+
+              <!-- Buttons -->
+              <button class='button-send' type='button' onclick='cambia_de_pagina()'>Nuevo Registro</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button class='button-send' type='button' onclick='cambia_de_pagina1()'>Cerrar Sesión</button>
+
+            </form>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+<script src="../js/index.js"></script>
+<script src="../js/loading.js"></script>
+
+</body>
+</html>
