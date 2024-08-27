@@ -9,7 +9,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuHZLNszfW0wE0iEYPuAYxW2vUDxlfD-MrPc4hpsxmOjgyGbCaXmodIWUvbfryAnVNF7ot1jTtmRfuEnHNcfze6dJEMeOw8pzfU8glKCPT7rNX472kuZPADUoZ8aGFhA9TO0e_FFwH_RjD_L8Ga8VPFAC48_4GZi9a5JXwTFKpKS9ncdR1e5LrDss1EQ/s16000/P%C3%A1gina%20Evaluaciones%20UCS%20-%20Loggin%20(ok).png") 50% fixed;
+  background: url("../img/BannerIndex.png") 20% fixed;
   background-size: cover;
   overflow: hidden;
 }
