@@ -24,6 +24,10 @@ body {
 	box-sizing: border-box;
 }
 
+main{
+  padding-top: 5px;
+}
+
 /* Estilos para el formulario */
 form {
 	margin: 5px;
@@ -188,6 +192,30 @@ div#toggle-menu span {
 .container2,
 .Title {
   display: block;
+}
+
+/* Ocultar .Title cuando la pantalla es menor a 1020px de ancho */
+@media (max-width: 1020px) {
+  .Title {
+    display: none;
+  }
+}
+
+form {
+  margin: 5px;
+  align-items: center;
+}
+
+input{
+  margin-left: 35px;
+  border-radius: 25px;
+  border-color: #aaa;
+  font-size: 12px;
+  padding: 5px;
+
+.container {
+    padding-left: 10px; /* Valor de padding-left reducido */}
+
 }
 
 /* Ocultar .container2 y .Title cuando la pantalla es menor a 768px de ancho */
