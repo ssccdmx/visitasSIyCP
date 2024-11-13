@@ -103,6 +103,7 @@ document.getElementById('formulario').addEventListener('submit', async (e) => {
     const submitButton = document.getElementById('submit-btn');
     submitButton.disabled = true; // Desactiva el botón de envío para evitar múltiples clics
 
+    const Folio = document.getElementById('Folio').value;
     const Status = document.getElementById('Status').value;
     const otherStatus = document.getElementById('other-status') ? document.getElementById('other-status').value : '';
     const Latitude = marker ? marker.getLatLng().lat : 0;
@@ -118,6 +119,7 @@ document.getElementById('formulario').addEventListener('submit', async (e) => {
     const data = {
         Fecha: obtenerFechaActual(),
         Integrante: getUserAlias(),
+        Folio: Folio,
         Status: Status,
         Otros: otherStatus,
         Latitude: Latitude,

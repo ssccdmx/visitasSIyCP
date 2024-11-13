@@ -88,6 +88,7 @@ document.getElementById('Status').addEventListener('change', function() {
 document.getElementById('formulario').addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const Folio = document.getElementById('Folio').value;
     const Integrante = document.getElementById('userAlias').value;
     const Status = document.getElementById('Status').value;
     const otherStatus = document.getElementById('other-status') ? document.getElementById('other-status').value : '';
@@ -96,6 +97,7 @@ document.getElementById('formulario').addEventListener('submit', async (e) => {
 
     const data = {
         Fecha: obtenerFechaActual(),
+        Folio: Folio,
         Integrante: Integrante,
         Status: Status,
         Otros: otherStatus,
