@@ -101,6 +101,10 @@ div#toggle-menu span {
 	.container-buttons {
 		padding-left: 200px;
 	}
+
+  .registro-activo{
+    width: 80%;
+  }
 }
 
 @media (max-width: 992px) {
@@ -118,6 +122,10 @@ div#toggle-menu span {
 	.container-buttons {
 		padding-left: 100px;
 	}
+
+  .registro-activo{
+    width: 80%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -149,6 +157,10 @@ div#toggle-menu span {
 		padding-left: 50px;
 		width: 100%;
 	}
+
+  .registro-activo{
+    width: 80%;
+  }
 }
 
 @media (max-width: 576px) {
@@ -185,6 +197,10 @@ div#toggle-menu span {
   .container2{
     width: 0%;
     height: 2%;
+  }
+
+  .registro-activo{
+    width: 80%;
   }
 }
 
