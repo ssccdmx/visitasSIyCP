@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Captura de Fotografía</title>
+  <title>Captura de Fotografía - Cámara Trasera</title>
   <style>
     #camera {
       width: 100%;
@@ -24,7 +24,7 @@
   </style>
 </head>
 <body>
-  <h1>Captura de Fotografía y Envío</h1>
+  <h1>Captura de Fotografía con la Cámara Trasera</h1>
 
   <!-- Video para previsualización de la cámara -->
   <video id="camera" autoplay></video>
@@ -35,15 +35,48 @@
   <img id="photo" src="" alt="Foto Capturada" style="max-width: 100%; max-height: 400px;">
   
   <script>
-    // Accede a la cámara del dispositivo
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then((stream) => {
+    // Función para obtener la cámara trasera
+    async function getRearCamera() {
+      try {
+        // Obtiene la lista de dispositivos de medios
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        
+        // Filtra solo los dispositivos de tipo 'videoinput' (cámaras)
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+        
+        // Busca la cámara trasera. Usualmente la primera cámara es la trasera
+        const rearCamera = videoDevices.find(device => device.label.toLowerCase().includes("back") || device.facing == "environment");
+        
+        if (rearCamera) {
+          return rearCamera.deviceId;
+        } else {
+          // Si no encuentra la cámara trasera, selecciona la cámara por defecto
+          console.log("Cámara trasera no encontrada, utilizando la cámara predeterminada.");
+          return videoDevices[0].deviceId; // Fallback a la cámara frontal o predeterminada
+        }
+      } catch (error) {
+        console.error("Error al obtener la cámara: ", error);
+        throw error;
+      }
+    }
+
+    // Función para iniciar la cámara
+    async function startCamera() {
+      try {
+        const cameraId = await getRearCamera(); // Obtiene el ID de la cámara trasera
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { deviceId: cameraId }
+        });
+
         const camera = document.getElementById('camera');
         camera.srcObject = stream;
-      })
-      .catch((error) => {
+      } catch (error) {
         alert("Error al acceder a la cámara: " + error);
-      });
+      }
+    }
+
+    // Inicia la cámara trasera al cargar la página
+    window.onload = startCamera;
 
     // Toma la foto cuando se presiona el botón
     document.getElementById('takePhotoBtn').addEventListener('click', function() {
