@@ -10,6 +10,7 @@
       max-width: 600px;
       height: auto;
       border: 1px solid #ccc;
+      display: none; /* Inicialmente oculto */
     }
     button {
       padding: 10px;
@@ -26,10 +27,13 @@
 <body>
   <h1>Captura de Fotografía con la Cámara Trasera</h1>
 
+  <!-- Botón para activar la cámara -->
+  <button id="activateCameraBtn">Activar Cámara</button>
+
   <!-- Video para previsualización de la cámara -->
   <video id="camera" autoplay></video>
   <br>
-  <button id="takePhotoBtn">Tomar Foto</button>
+  <button id="takePhotoBtn" style="display:none;">Tomar Foto</button> <!-- Solo aparece cuando se activa la cámara -->
   <canvas id="canvas" style="display: none;"></canvas>
   <br>
   <img id="photo" src="" alt="Foto Capturada" style="max-width: 100%; max-height: 400px;">
@@ -70,13 +74,42 @@
 
         const camera = document.getElementById('camera');
         camera.srcObject = stream;
+        
+        // Mostrar el video y el botón de tomar foto
+        camera.style.display = "block";
+        document.getElementById('takePhotoBtn').style.display = "inline"; // Mostrar botón "Tomar Foto"
       } catch (error) {
         alert("Error al acceder a la cámara: " + error);
       }
     }
 
-    // Inicia la cámara trasera al cargar la página
-    window.onload = startCamera;
+    // Inicia la cámara cuando se presiona el botón
+    document.getElementById('activateCameraBtn').addEventListener('click', function() {
+      startCamera();
+      // Cambiar el texto del botón para desactivar la cámara
+      this.innerText = "Desactivar Cámara";
+      this.id = "deactivateCameraBtn"; // Cambiar id del botón para desactivar la cámara
+    });
+
+    // Desactiva la cámara y oculta el video
+    document.body.addEventListener('click', function(event) {
+      if (event.target && event.target.id == "deactivateCameraBtn") {
+        const camera = document.getElementById('camera');
+        const stream = camera.srcObject;
+        const tracks = stream.getTracks();
+
+        // Detiene todos los tracks de la cámara
+        tracks.forEach(track => track.stop());
+
+        // Ocultar el video y el botón de tomar foto
+        camera.style.display = "none";
+        document.getElementById('takePhotoBtn').style.display = "none";
+
+        // Cambiar el texto del botón para activar la cámara nuevamente
+        event.target.innerText = "Activar Cámara";
+        event.target.id = "activateCameraBtn"; // Cambiar id del botón para activar la cámara
+      }
+    });
 
     // Toma la foto cuando se presiona el botón
     document.getElementById('takePhotoBtn').addEventListener('click', function() {
