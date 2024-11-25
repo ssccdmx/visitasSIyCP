@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Captura de Fotografía</title>
+  <style>
+    #camera {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Captura de Fotografía y Envío</h1>
+
+  <!-- Video para previsualización de la cámara -->
+  <video id="camera" autoplay></video>
+  <br>
+  <button id="takePhotoBtn">Tomar Foto</button>
+  <canvas id="canvas" style="display: none;"></canvas>
+  <br>
+  <img id="photo" src="" alt="Foto Capturada" style="max-width: 100%; max-height: 400px;">
+  
+  <script>
+    // Accede a la cámara del dispositivo
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        const camera = document.getElementById('camera');
+        camera.srcObject = stream;
+      })
+      .catch((error) => {
+        alert("Error al acceder a la cámara: " + error);
+      });
+
+    // Toma la foto cuando se presiona el botón
+    document.getElementById('takePhotoBtn').addEventListener('click', function() {
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      const video = document.getElementById('camera');
+      
+      // Establece las dimensiones del lienzo
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      
+      // Dibuja el fotograma actual del video en el lienzo
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Convierte el lienzo en una imagen base64
+      const dataUrl = canvas.toDataURL('image/jpeg');
+      document.getElementById('photo').src = dataUrl;
+      
+      // Enviar la imagen a SheetDB
+      sendToSheetDB(dataUrl);
+    });
+
+    // Función para enviar la imagen a SheetDB
+    function sendToSheetDB(dataUrl) {
+      // Construir el cuerpo de la solicitud (formato JSON)
+      const data = {
+        "image": dataUrl
+      };
+
+      fetch('https://sheetdb.io/api/v1/bs9icp7wbc1qe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Éxito:', result);
+        alert('La foto se ha guardado correctamente.');
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al guardar la foto.');
+      });
+    }
+  </script>
+</body>
+</html>
