@@ -106,10 +106,10 @@
               <!-- Video para previsualización de la cámara (inicialmente oculto) -->
               <video hidden id="camera" autoplay></video>
               <br>
-              <div class="button-camera" id="takePhotoBtn">Tomar Foto</div> <!-- Botón visible para tomar la foto -->
+              <button style="padding: 10px;background-color: var(--secundario);color: white;border: none;cursor: pointer;border-radius: 50px;text-align: center" id="takePhotoBtn">Tomar Foto</button> <!-- Botón visible para tomar la foto -->
               <canvas id="canvas" style="display: none;"></canvas> <!-- Canvas oculto para procesar la foto -->
               <br>
-              <img id="photo" src="" alt="Foto Capturada" style="max-width: 80%; max-height: 400px;">
+              <img id="photo" src="" alt="Foto Capturada" style="max-width: 100%; max-height: 400px;">
               
               <script>
                 // Función para obtener la cámara trasera
@@ -136,7 +136,7 @@
                     throw error;
                   }
                 }
-            
+
                 // Función para iniciar la cámara
                 async function startCamera() {
                   try {
@@ -144,20 +144,20 @@
                     const stream = await navigator.mediaDevices.getUserMedia({
                       video: { deviceId: cameraId }
                     });
-            
+
                     const camera = document.getElementById('camera');
                     camera.srcObject = stream;
-            
+
                     // Ahora el video está corriendo en segundo plano, pero está oculto
                     camera.style.display = "none"; // Video oculto
                   } catch (error) {
                     alert("Error al acceder a la cámara: " + error);
                   }
                 }
-            
+
                 // Inicia la cámara trasera al cargar la página
                 window.onload = startCamera;
-            
+
                 // Toma la foto cuando se presiona el botón
                 document.getElementById('takePhotoBtn').addEventListener('click', function() {
                   const canvas = document.getElementById('canvas');
@@ -178,14 +178,14 @@
                   // Enviar la imagen a SheetDB
                   sendToSheetDB(dataUrl);
                 });
-            
+
                 // Función para enviar la imagen a SheetDB
                 function sendToSheetDB(dataUrl) {
                   // Construir el cuerpo de la solicitud (formato JSON)
                   const data = {
                     "image": dataUrl
                   };
-            
+
                   fetch('https://sheetdb.io/api/v1/bs9icp7wbc1qe', {
                     method: 'POST',
                     headers: {
