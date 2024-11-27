@@ -72,7 +72,7 @@
 
 
 
-          <div id="map" style="height: 500px;width: 90%;"></div><br>
+          <div id="map" style="height: 500px;width: 80%;"></div><br>
 
           <div class="container-header1">
 
@@ -102,9 +102,114 @@
               <!-- Campo oculto para el valor de Integrante -->
               <input type="hidden" id="Integrante" name="Integrante">
 
+
+              <!-- Video para previsualización de la cámara (inicialmente oculto) -->
+              <video hidden id="camera" autoplay></video>
+              <br>
+              <div class="button-camera" id="takePhotoBtn">Tomar Foto</div> <!-- Botón visible para tomar la foto -->
+              <canvas id="canvas" style="display: none;"></canvas> <!-- Canvas oculto para procesar la foto -->
+              <br>
+              <img id="photo" src="" alt="Foto Capturada" style="max-width: 80%; max-height: 400px;">
+              
+              <script>
+                // Función para obtener la cámara trasera
+                async function getRearCamera() {
+                  try {
+                    // Obtiene la lista de dispositivos de medios
+                    const devices = await navigator.mediaDevices.enumerateDevices();
+                    
+                    // Filtra solo los dispositivos de tipo 'videoinput' (cámaras)
+                    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                    
+                    // Busca la cámara trasera. Usualmente la primera cámara es la trasera
+                    const rearCamera = videoDevices.find(device => device.label.toLowerCase().includes("back") || device.facing == "environment");
+                    
+                    if (rearCamera) {
+                      return rearCamera.deviceId;
+                    } else {
+                      // Si no encuentra la cámara trasera, selecciona la cámara por defecto
+                      console.log("Cámara trasera no encontrada, utilizando la cámara predeterminada.");
+                      return videoDevices[0].deviceId; // Fallback a la cámara frontal o predeterminada
+                    }
+                  } catch (error) {
+                    console.error("Error al obtener la cámara: ", error);
+                    throw error;
+                  }
+                }
+            
+                // Función para iniciar la cámara
+                async function startCamera() {
+                  try {
+                    const cameraId = await getRearCamera(); // Obtiene el ID de la cámara trasera
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                      video: { deviceId: cameraId }
+                    });
+            
+                    const camera = document.getElementById('camera');
+                    camera.srcObject = stream;
+            
+                    // Ahora el video está corriendo en segundo plano, pero está oculto
+                    camera.style.display = "none"; // Video oculto
+                  } catch (error) {
+                    alert("Error al acceder a la cámara: " + error);
+                  }
+                }
+            
+                // Inicia la cámara trasera al cargar la página
+                window.onload = startCamera;
+            
+                // Toma la foto cuando se presiona el botón
+                document.getElementById('takePhotoBtn').addEventListener('click', function() {
+                  const canvas = document.getElementById('canvas');
+                  const context = canvas.getContext('2d');
+                  const video = document.getElementById('camera');
+                  
+                  // Establece las dimensiones del lienzo
+                  canvas.width = video.videoWidth;
+                  canvas.height = video.videoHeight;
+                  
+                  // Dibuja el fotograma actual del video en el lienzo
+                  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                  
+                  // Convierte el lienzo en una imagen base64
+                  const dataUrl = canvas.toDataURL('image/jpeg');
+                  document.getElementById('photo').src = dataUrl;
+                  
+                  // Enviar la imagen a SheetDB
+                  sendToSheetDB(dataUrl);
+                });
+            
+                // Función para enviar la imagen a SheetDB
+                function sendToSheetDB(dataUrl) {
+                  // Construir el cuerpo de la solicitud (formato JSON)
+                  const data = {
+                    "image": dataUrl
+                  };
+            
+                  fetch('https://sheetdb.io/api/v1/bs9icp7wbc1qe', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                  })
+                  .then(response => response.json())
+                  .then(result => {
+                    console.log('Éxito:', result);
+                    alert('La foto se ha guardado correctamente.');
+                  })
+                  .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un error al guardar la foto.');
+                  });
+                }
+              </script>
+
           
+              <!-- Campo para subir fotografía oculto -->
               <label hidden for="photo">Subir Fotografía:</label>
               <input hidden type="file" id="photo" name="photo" accept="image/*"><br><br>
+              <!-- Termina campo para subir fotografía oculto -->
           
               <button class="button-send" type="submit" id="submit-btn">Enviar</button> <br>
 
@@ -121,6 +226,22 @@
   </div>
 
 <script src="../js/index.js"></script>
+
+<script>
+  // Verificar si el usuario está logueado
+  if (!localStorage.getItem('loggedIn')) {
+      // Si no está autenticado, redirigir al inicio de sesión
+      window.location.href = 'index.html';
+  }
+
+  // Función para obtener el alias del usuario desde sessionStorage
+  function getUserAlias() {
+      return sessionStorage.getItem("userAlias");
+  }
+
+  // Cargar el alias del usuario en la página
+  document.getElementById('userAlias').textContent = getUserAlias() || "Usuario desconocido";
+</script>
 
 </body>
 </html>
