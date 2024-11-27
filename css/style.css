@@ -1326,3 +1326,24 @@ button:focus {
   justify-content: center;
 }
 
+
+
+#camera {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border: 1px solid #ccc;
+  display: none; /* Ocultar video al principio */
+}
+.button-camera {
+  padding: 10px;
+  background-color: var(--secundario);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  text-align: center;
+}
+.button-camera:hover {
+  background-color: var(--primario);
+}
