@@ -94,6 +94,7 @@ document.getElementById('formulario').addEventListener('submit', async (e) => {
     const otherStatus = document.getElementById('other-status') ? document.getElementById('other-status').value : '';
     const Latitude = marker ? marker.getLatLng().lat : 0;
     const Longitude = marker ? marker.getLatLng().lng : 0;
+    const photo = document.getElementById('photo').value;
 
     const data = {
         Fecha: obtenerFechaActual(),
@@ -102,7 +103,8 @@ document.getElementById('formulario').addEventListener('submit', async (e) => {
         Status: Status,
         Otros: otherStatus,
         Latitude: Latitude,
-        Longitude: Longitude
+        Longitude: Longitude,
+        photo: photo
     };
 
     const respuesta = await fetch('https://sheetdb.io/api/v1/bs9icp7wbc1qe', {
